@@ -26,7 +26,3 @@ server.listen(8000, () => {
   console.log("live");
   //   console.log(mongoose.modelNames());
 });
-
-///POS
-//user = demjim737_db_user
-// Pass =  OjixFvz8jQ8GlYpx

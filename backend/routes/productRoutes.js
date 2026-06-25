@@ -43,3 +43,5 @@ router.post("/", productValidator, validate, (req, res) => {
     });
   }
 });
+
+module.exports = router;
