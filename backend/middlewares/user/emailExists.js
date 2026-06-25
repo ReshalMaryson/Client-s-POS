@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const User = require("../../models/userSchema");
 
 // middleware to check if the provided email already exists in DB or not.

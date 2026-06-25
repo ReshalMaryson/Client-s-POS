@@ -14,6 +14,7 @@ exports.Products = async (req, res) => {
     return res.status(200).json({
       status: "success",
       data: products,
+      user: req.id,
     });
   } catch (err) {
     console.log(err);
@@ -59,7 +60,7 @@ exports.getProductById = async (req, res) => {
 };
 
 // create product
-exports.productCreate = async (req, res) => {
+exports.createProduct = async (req, res) => {
   try {
     const prodCreate = await Product.create(req.body);
 
@@ -81,3 +82,45 @@ exports.productCreate = async (req, res) => {
 };
 
 // update a product
+exports.updateProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const payload = {
+      name: req.body.name,
+      brand: req.body.brand,
+      specs: req.body.specs,
+      price: req.body.price,
+      cost: req.body.cost,
+      stock: req.body.stock,
+    };
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        status: "failure",
+        message: "Invalid product id",
+      });
+    }
+
+    const updated = await Product.findByIdAndUpdate(id, payload, {
+      new: true, // returns updated record
+      runValidators: true, // applies the schema validation
+    });
+
+    if (!updated) {
+      return res.status(404).json({
+        status: "failure",
+        message: "Product not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      data: updated,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      status: "failure",
+      message: "Server Error",
+    });
+  }
+};
