@@ -11,7 +11,7 @@ exports.productValidator = [
     .isNumeric()
     .withMessage("Price must be a number"),
 
-  body("costPrice")
+  body("cost")
     .notEmpty()
     .withMessage("Cost price is required")
     .isNumeric()

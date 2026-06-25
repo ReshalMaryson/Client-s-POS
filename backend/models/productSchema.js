@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
       gpu: String,
     },
     price: Number,
-    costPrice: Number,
+    cost: Number,
     stock: Number,
   },
   { timestamps: true },
