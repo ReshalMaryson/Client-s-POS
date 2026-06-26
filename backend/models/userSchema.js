@@ -3,14 +3,15 @@ require("../models/userroleSchema");
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, maxlength: 20, required: true },
     email: {
       type: String,
       required: false,
+      maxlength: 30,
       unique: true,
       match: /.+\@.+\..+/, // simple email validation
     },
-    phone: { type: Number, min: 11 },
+    phone: { type: String, minlength: 11, maxlength: 11 },
     roleid: {
       type: mongoose.Types.ObjectId,
       ref: "userroles",
