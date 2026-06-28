@@ -14,7 +14,6 @@ exports.createSale = async (req, res) => {
       },
     });
 
-    // 3. Create sale items array
     const saleItems = [];
 
     for (const cartItem of cartItems) {
