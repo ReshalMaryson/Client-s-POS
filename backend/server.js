@@ -10,7 +10,9 @@ const ConnectDB = require("./db/db");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
+const salesRoutes = require("./routes/salesRoutes");
 
+//middlewares
 server.use(express.json());
 server.use(cookieParser());
 
@@ -21,7 +23,9 @@ ConnectDB();
 server.use("/auth", authRoutes);
 server.use("/users", userRoutes);
 server.use("/products", productRoutes);
+server.use("/sales", salesRoutes);
 
+//server start
 server.listen(8000, () => {
   console.log("live");
   //   console.log(mongoose.modelNames());
