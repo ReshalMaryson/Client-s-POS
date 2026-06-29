@@ -15,8 +15,8 @@ const saleSchema = new mongoose.Schema(
     },
 
     customer: {
-      name: String,
-      phone: String,
+      name: { type: String, required: true },
+      phone: { type: String, required: true },
     },
 
     items: [
