@@ -29,7 +29,7 @@ export default function Login() {
 
     try {
       const res = await api.post("/auth/login", payload); // returns the user data.
-      //   navigate("/profile");
+      navigate("/profile");
       console.log(res.data.data); //
       login(res.data.data);
     } catch (err) {
