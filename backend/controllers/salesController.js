@@ -104,7 +104,7 @@ exports.createSale = async (req, res) => {
 
     // update the stock
     for (const item of cartItems) {
-      await Products.findByIdAndUpdate(
+      await Products.findByIdAndUpdate( 
         item.id,
         {
           $inc: {

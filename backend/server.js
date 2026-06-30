@@ -2,6 +2,7 @@ const express = require("express");
 const server = express();
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const ConnectDB = require("./db/db");
 
@@ -10,6 +11,14 @@ const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const salesRoutes = require("./routes/salesRoutes");
+
+//cors
+server.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
 //middlewares
 server.use(express.json());
