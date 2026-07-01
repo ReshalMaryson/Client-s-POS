@@ -4,59 +4,36 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 // controller
 import { logoutAttempt } from "../auth/controllers/authControllers";
-import { getUser } from "./controllers/userController";
+import {
+  getUser,
+  updateUser,
+  deleteAccount,
+} from "./controllers/userController";
+
 export default function Profile() {
   const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
-
-  const [user2, setUser] = useState(user);
+  const { logout } = useContext(AuthContext);
+  const [user, setUser] = useState();
   const [updateData, setUpdateData] = useState({
-    Id: "",
     name: "", // name
     email: "",
     phone: "",
   });
   //  run on mount
   useEffect(() => {
-    getUser(user, setUser);
+    getUser(setUser);
   }, []);
 
   //assign data for updation
   useEffect(() => {
     if (user) {
       setUpdateData({
-        Id: user2._id,
-        name: user2.name, // name
-        email: user2.email,
-        phone: user2.phone,
+        name: user.name, // name
+        email: user.email,
+        phone: user.phone,
       });
     }
-  }, [user2]);
-
-  //  fetch user for profile
-  // async function getUser() {
-  //   try {
-  //     const res = await api.get(`/users/${user2.id}`); // refresh token will be handled by interceptor that's why request is binded in api.get().
-  //     if (res.data.user.roleid.role == "admin") {
-  //       console.log("not a consumer"); // role based check
-  //     }
-  //     setUser(res.data.user);
-  //     console.log(res.data.user);
-  //   } catch (err) {
-  //     console.log(err.response?.data || err.message);
-  //     console.log(err);
-  //   }
-  // }
-
-  //   delete account
-  async function DeleteAcc() {
-    try {
-      const res = await api.delete(`/users/${user2.id}`);
-      navigate("/login");
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  }, [user]);
 
   // handle update data
   function onChangeHandle(e) {
@@ -66,41 +43,29 @@ export default function Profile() {
     });
   }
 
-  //  update user
-  async function UpdateUserDetails() {
-    console.log(updateData);
-    try {
-      const res = await api.put("/users", updateData);
-      getUser(); // refresh the user's updated data
-    } catch (err) {
-      // NOTE : our backend response is stored in repsonse.data object made by axios, err is just for generic axios responses.
-      console.log(err.response.data.message);
-    }
-  }
-
   return (
     <>
       <h1>User Profile</h1>
 
-      {user2 ? (
+      {user ? (
         <div>
           <p>
-            <b>id:</b> {user2.id}
+            <b>id:</b> {user._id}
           </p>
           <p>
-            <b>hey:</b> {user2.name}
+            <b>hey:</b> {user.name}
           </p>
           <p>
-            <b>Email:</b> {user2.email}
+            <b>Email:</b> {user.email}
           </p>
           <p>
-            <b>role:</b> {user2.roleid.role}
+            <b>role:</b> {user.roleid.role}
           </p>
         </div>
       ) : (
         <p>Loading user...</p>
       )}
-      {user2 ? (
+      {user ? (
         <div className="updateDetails">
           <hr />
 
@@ -110,11 +75,10 @@ export default function Profile() {
             <input
               type="text"
               name="name"
-              value={updateData.name} // this is not being shown
+              value={updateData.name}
               onChange={onChangeHandle}
             />
           </div>
-
           <div>
             <label htmlFor="email">email : </label>
             <input
@@ -122,7 +86,6 @@ export default function Profile() {
               readOnly
               name="email"
               value={updateData.email}
-              onChange={onChangeHandle}
             />
           </div>
 
@@ -144,13 +107,25 @@ export default function Profile() {
       <div>
         <button
           onClick={() => {
-            logoutAttempt(navigate);
+            logoutAttempt(navigate, logout);
           }}
         >
           Logout
         </button>
-        <button onClick={UpdateUserDetails}>Update Details</button>
-        <button onClick={DeleteAcc}>Delete Account</button>
+        <button
+          onClick={() => {
+            updateUser(user._id, updateData, setUser);
+          }}
+        >
+          Update Details
+        </button>
+        <button
+          onClick={() => {
+            deleteAccount(user._id, logoutAttempt, navigate, logout);
+          }}
+        >
+          Delete Account
+        </button>
       </div>
     </>
   );

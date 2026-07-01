@@ -22,9 +22,9 @@ exports.isAdmin = async (req, res, next) => {
     }
 
     if (user.roleid.role !== "admin") {
-      return res.status(404).json({
+      return res.status(401).json({
         status: "failure",
-        message: "not an admin",
+        message: "unauthorized | not an admin",
       });
     }
 

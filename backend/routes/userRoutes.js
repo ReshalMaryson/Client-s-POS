@@ -42,9 +42,6 @@ router.get("/:id", verifyToken, checkUserExists, getUserById);
 // create a user
 router.post("/", createUserValidator, validate, emailCheck, createUser);
 
-// delete a user
-router.delete("/:id", verifyToken, isAdmin, deleteUser);
-
 // update all details of user
 router.put(
   "/:id",
@@ -54,5 +51,6 @@ router.put(
   validate,
   updateUser,
 );
-
+// delete a user
+router.delete("/:id", verifyToken, isAdmin, deleteUser);
 module.exports = router;
