@@ -2,6 +2,8 @@ import api from "../../api/axios";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+// controller
+import { logoutAttempt } from "../auth/controllers/authControllers";
 export default function Profile() {
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
@@ -16,7 +18,7 @@ export default function Profile() {
   });
   //  run on mount
   useEffect(() => {
-    getUser();
+    getUser(user);
   }, []);
 
   //assign data for updation
@@ -32,31 +34,19 @@ export default function Profile() {
   }, [user]);
 
   //  fetch user for profile
-  async function getUser() {
-    try {
-      const res = await api.get(`/users/${user2.id}`); // refresh token will be handled by interceptor that's why request is binded in api.get().
-      if (res.data.user.roleid.role == "admin") {
-        console.log("not a consumer"); // role based check
-      }
-      setUser(res.data.user);
-      console.log(res.data.user);
-    } catch (err) {
-      console.log(err.response?.data || err.message);
-      console.log(err);
-    }
-  }
-
-  // logout
-  async function AttemptLogout() {
-    try {
-      const res = await api.post("/auth/logout");
-
-      console.log(res.data);
-      navigate("/login");
-    } catch (err) {
-      console.log(err.response?.data || err.message);
-    }
-  }
+  // async function getUser() {
+  //   try {
+  //     const res = await api.get(`/users/${user2.id}`); // refresh token will be handled by interceptor that's why request is binded in api.get().
+  //     if (res.data.user.roleid.role == "admin") {
+  //       console.log("not a consumer"); // role based check
+  //     }
+  //     setUser(res.data.user);
+  //     console.log(res.data.user);
+  //   } catch (err) {
+  //     console.log(err.response?.data || err.message);
+  //     console.log(err);
+  //   }
+  // }
 
   //   delete account
   async function DeleteAcc() {
@@ -152,7 +142,13 @@ export default function Profile() {
       )}
 
       <div>
-        <button onClick={AttemptLogout}>Logout</button>
+        <button
+          onClick={() => {
+            logoutAttempt(navigate);
+          }}
+        >
+          Logout
+        </button>
         <button onClick={UpdateUserDetails}>Update Details</button>
         <button onClick={DeleteAcc}>Delete Account</button>
       </div>
