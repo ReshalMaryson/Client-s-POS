@@ -1,41 +1,26 @@
 import "../../css/login.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/axios.js";
-// import Header from "../header";
-
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext.jsx";
 
+// import api from "../../api/axios.js";
+// import Header from "../header";
+
+// conrtollers
+import { loginAttempt } from "./controllers/authControllers";
+
 export default function Login() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  async function Attemptlogin(e) {
-    e.preventDefault();
-
-    if (!email || !password) {
-      alert("enter values");
-      return;
-    }
-
-    const payload = {
-      email: email.trim(),
-      pass: password.trim(),
-    };
-
-    try {
-      const res = await api.post("/auth/login", payload); // returns the user data.
-      navigate("/profile");
-      console.log(res.data.data); //
-      login(res.data.data);
-    } catch (err) {
-      console.log(err.response?.data || err.message);
-    }
-  }
+  const userCredentials = {
+    email: email.trim(),
+    pass: password.trim(),
+  };
 
   return (
     <>
@@ -65,7 +50,12 @@ export default function Login() {
             }}
           />
         </div>
-        <button type="button" onClick={Attemptlogin}>
+        <button
+          type="button"
+          onClick={() => {
+            loginAttempt(userCredentials, navigate, login);
+          }}
+        >
           login
         </button>
       </form>

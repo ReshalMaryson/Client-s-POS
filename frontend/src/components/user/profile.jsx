@@ -1,46 +1,47 @@
 import api from "../../api/axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../../context/authContext";
 export default function Profile() {
-  //const { id } = useParams(); // id from url after user logs in
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+  console.log(user);
 
-  const [user, setUser] = useState(null);
+  const [user2, setUser] = useState(user);
   const [updateData, setUpdateData] = useState({
     Id: "",
     name: "", // name
     email: "",
     phone: "",
   });
-  // run on mount
+  //  run on mount
   useEffect(() => {
     getUser();
   }, []);
 
-  // assign data for updation
+  //assign data for updation
   useEffect(() => {
     if (user) {
       setUpdateData({
-        Id: user._id,
-        name: user.name, // name
-        email: user.email,
-        phone: user.phone,
+        Id: user2._id,
+        name: user2.name, // name
+        email: user2.email,
+        phone: user2.phone,
       });
     }
   }, [user]);
 
-  // fetch user for profile
+  //  fetch user for profile
   async function getUser() {
     try {
-      const res = await api.get("/users/me"); // refresh token will be handled by interceptor that's why request is binded in api.get().
+      const res = await api.get(`/users/${user2.id}`); // refresh token will be handled by interceptor that's why request is binded in api.get().
       if (res.data.user.roleid.role == "admin") {
         console.log("not a consumer"); // role based check
       }
       setUser(res.data.user);
-      // console.log(res.data.user);
+      console.log(res.data.user);
     } catch (err) {
-      // console.log(err.response?.data || err.message);
+      console.log(err.response?.data || err.message);
       console.log(err);
     }
   }
@@ -50,17 +51,17 @@ export default function Profile() {
     try {
       const res = await api.post("/auth/logout");
 
-      // console.log(res.data);
+      console.log(res.data);
       navigate("/login");
     } catch (err) {
       console.log(err.response?.data || err.message);
     }
   }
 
-  // delete account
+  //   delete account
   async function DeleteAcc() {
     try {
-      const res = await api.delete(`/users/${user._id}`);
+      const res = await api.delete(`/users/${user2.id}`);
       navigate("/login");
     } catch (err) {
       console.log(err);
@@ -91,25 +92,25 @@ export default function Profile() {
     <>
       <h1>User Profile</h1>
 
-      {user ? (
+      {user2 ? (
         <div>
           <p>
-            <b>id:</b> {user._id}
+            <b>id:</b> {user2.id}
           </p>
           <p>
-            <b>hey:</b> {user.name}
+            <b>hey:</b> {user2.name}
           </p>
           <p>
-            <b>Email:</b> {user.email}
+            <b>Email:</b> {user2.email}
           </p>
           <p>
-            <b>role:</b> {user.roleid.role}
+            <b>role:</b> {user2.role.role}
           </p>
         </div>
       ) : (
         <p>Loading user...</p>
       )}
-      {user ? (
+      {user2 ? (
         <div className="updateDetails">
           <hr />
 

@@ -2,8 +2,7 @@ import "../css/header.css";
 import api from "./../api/axios";
 
 import { useEffect, useContext } from "react";
-
-import { AuthContext } from "./context/authContext";
+import { AuthContext } from "../context/authContext";
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
@@ -14,13 +13,9 @@ export default function Header() {
       const res = await api.post("/auth/logout");
       logout(); // empty AuthContext State
       navigate("/login");
-
-      // console.log(res.data);
     } catch (err) {
       console.log(err.response?.data || err.message);
     }
-
-    console.log("logout from header");
   }
 
   return (
