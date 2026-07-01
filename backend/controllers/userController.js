@@ -53,6 +53,35 @@ exports.getUserById = async (req, res) => {
   }
 };
 
+// get JWT verified user
+exports.getVerifiedUser = async (req, res) => {
+  try {
+    const id = req.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(500).json({ status: "failure", message: "invalid Id" });
+    }
+
+    const user = await User.findById(id).populate("roleid");
+    if (!user) {
+      return res
+        .status(404)
+        .json({ status: "failure", message: "User not found" });
+    }
+
+    //success respose
+    return res
+      .status(200)
+      .json({ status: "success", message: "details fetched", user: user });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      status: "failure",
+      message: "Server Error",
+    });
+  }
+};
+
 //create a user
 exports.createUser = async (req, res) => {
   try {

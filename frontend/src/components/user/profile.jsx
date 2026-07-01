@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 // controller
 import { logoutAttempt } from "../auth/controllers/authControllers";
+import { getUser } from "./controllers/userController";
 export default function Profile() {
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
 
   const [user2, setUser] = useState(user);
   const [updateData, setUpdateData] = useState({
@@ -18,7 +18,7 @@ export default function Profile() {
   });
   //  run on mount
   useEffect(() => {
-    getUser(user);
+    getUser(user, setUser);
   }, []);
 
   //assign data for updation
@@ -31,7 +31,7 @@ export default function Profile() {
         phone: user2.phone,
       });
     }
-  }, [user]);
+  }, [user2]);
 
   //  fetch user for profile
   // async function getUser() {
@@ -94,7 +94,7 @@ export default function Profile() {
             <b>Email:</b> {user2.email}
           </p>
           <p>
-            <b>role:</b> {user2.role.role}
+            <b>role:</b> {user2.roleid.role}
           </p>
         </div>
       ) : (

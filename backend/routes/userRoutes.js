@@ -25,12 +25,16 @@ const {
   createUser,
   deleteUser,
   updateUser,
+  getVerifiedUser,
 } = require("../controllers/userController");
 
 //-------routes---------//
 
 // get all users
 router.get("/", verifyToken, isAdmin, allUsers);
+
+// get the details of JWT verified user
+router.get("/me", verifyToken, getVerifiedUser);
 
 //get a user by id
 router.get("/:id", verifyToken, checkUserExists, getUserById);
@@ -52,19 +56,3 @@ router.put(
 );
 
 module.exports = router;
-
-//get the details of the user logged in currently.
-// router.get("/me", verifyToken, async (req, res) => {
-//   //res.send("hehe");
-//   try {
-//     const me = await Users.findById(req.id).populate("roleid");
-//     if (!me) {
-//       return res.status(404).json({ message: "user not found" });
-//     }
-//     return res.status(200).json({
-//       user: me,
-//     });
-//   } catch (err) {
-//     return res.status(500).json({ error: err });
-//   }
-// });
