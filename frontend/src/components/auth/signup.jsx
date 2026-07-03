@@ -28,8 +28,6 @@ export default function SignUp() {
 
   // form submit
   const handleSubmit = (e) => {
-    console.log("from components ");
-    console.log(formData);
     signUp(e, navigate, formData, setFormData, setMessage, setLoading);
   };
 
