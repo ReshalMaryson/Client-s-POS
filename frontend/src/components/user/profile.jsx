@@ -1,7 +1,7 @@
-import api from "../../api/axios";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+
 // controller
 import { logoutAttempt } from "../auth/controllers/authControllers";
 import {
@@ -14,6 +14,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const [user, setUser] = useState();
+
   const [updateData, setUpdateData] = useState({
     name: "", // name
     email: "",

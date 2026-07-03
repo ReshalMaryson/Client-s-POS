@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Login from "./components/auth/login";
 import Profile from "./components/user/profile";
-// import SignUp from "./auth_components/signup";
+import SignUp from "./components/auth/signup";
 function App() {
   return (
     <>
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/signup" element={<SignUp />} />*/}
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </>

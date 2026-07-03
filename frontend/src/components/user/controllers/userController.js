@@ -37,8 +37,7 @@ export const updateUser = async (id, updateData, setUser) => {
 //delete account
 export const deleteAccount = async (id, logoutReq, navigate, contextEmpty) => {
   try {
-    // const res = await api.delete(`/users/${id}`);
-    const res = await api.delete(`/users/6a455e685735c9b8806f8bd9`);
+    const res = await api.delete(`/users/${id}`);
 
     if (res.status == 200) {
       logoutReq(navigate, contextEmpty);

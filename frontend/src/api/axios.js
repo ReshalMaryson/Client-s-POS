@@ -1,26 +1,26 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000", // my backend server url as base url for each request
-  withCredentials: true, // for cookies
+  baseURL: "http://localhost:8000",
+  withCredentials: true,
 });
 
 // interceptor for Refresh Token
 api.interceptors.response.use(
-  (response) => response, // if no 401 then simply return what came from server
+  (response) => response,
 
   async (error) => {
-    const originalRequest = error.config; // this gives us the original request for api(url , method, headers)
+    const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // mark orignal request as tried so it doesn't keeps retrying
+      originalRequest._retry = true;
 
-      await api.post("/auth/refresh"); // refresh teh access token
+      await api.post("/auth/refresh");
 
-      return api(originalRequest); //  re-send the same request againa after refreshed access token
+      return api(originalRequest);
     }
 
-    return Promise.reject(error); // this is where we can send error to UI to show if user is still unauthenticated or request in invalid
+    return Promise.reject(error);
   },
 );
 
