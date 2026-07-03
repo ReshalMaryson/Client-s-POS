@@ -1,13 +1,30 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import api from "../api/axios";
 
 export const AuthContext = createContext(); // this creates an empty context box,like an empty notice board.
 
 export default function AuthProvider({ children }) {
-  // this is the brain of the context
   const [user, setUser] = useState(null);
 
-  const login = (userData) => setUser(userData); // function to set the user's data
-  const logout = () => setUser(null); // empty the user data by this function
+  const login = (userData) => setUser(userData);
+  const logout = () => setUser(null);
+  console.log("user from context");
+  console.log(user);
+
+  async function getAuthUser() {
+    try {
+      const res = await api.get(`/users/me`);
+      if (res.status == 200) {
+        setUser(res.data.user);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // useEffect(() => {
+  //   getAuthUser();
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

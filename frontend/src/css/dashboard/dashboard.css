@@ -1,0 +1,42 @@
+.container{
+   
+}
+/* buttons */
+
+/* show components */
+
+.emp{
+    display: none;
+}
+
+.emp.active{
+    display: block;
+    background-color: bisque;
+}
+
+.prod{
+    display: none;
+}
+
+.prod.active{
+    display: block;
+    background-color: brown;
+}
+
+.sales{
+    display: none;
+}
+
+.sales.active{
+    display: block;
+    background-color: blue;
+}
+
+.cust{
+    display: none;
+}
+
+.cust.active{
+    display: block;
+    background-color: blueviolet;
+}
