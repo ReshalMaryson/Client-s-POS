@@ -12,13 +12,19 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      await api.post("/auth/refresh");
-      return api(originalRequest);
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      originalRequest.url !== "/auth/refresh"
+    ) {
+      try {
+        originalRequest._retry = true;
+        await api.post("/auth/refresh");
+        return api(originalRequest);
+      } catch {
+        return Promise.reject(error);
+      }
     }
-
-    return Promise.reject(error);
   },
 );
 

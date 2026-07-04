@@ -11,8 +11,8 @@ export default function Header() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log("user from header");
-  console.log(user);
+  // console.log("user from header");
+  // console.log(user);
   // console.log("logged in user from header");
   // console.log(loggedInUser);
 

@@ -26,17 +26,3 @@
 .sales{
     display: none;
 }
-
-.sales.active{
-    display: block;
-    background-color: blue;
-}
-
-.cust{
-    display: none;
-}
-
-.cust.active{
-    display: block;
-    background-color: blueviolet;
-}

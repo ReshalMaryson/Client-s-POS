@@ -1,0 +1,35 @@
+
+.emp-header,
+.emp-row {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-family: sans-serif;
+}
+
+.emp-header {
+    background: #2d3748;
+    color: white;
+    font-weight: bold;
+}
+
+.emp-header p,
+.emp-row p {
+    flex: 1;
+    margin: 0;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.light {
+    background: #ffffff;
+}
+
+.dark {
+    background: #f3f4f6;
+}
+
+.emp-row:hover {
+    background: #dbeafe;
+    cursor: pointer;
+}

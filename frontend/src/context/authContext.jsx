@@ -8,23 +8,22 @@ export default function AuthProvider({ children }) {
 
   const login = (userData) => setUser(userData);
   const logout = () => setUser(null);
-  console.log("user from context");
-  console.log(user);
 
+  // get auth user
   async function getAuthUser() {
     try {
       const res = await api.get(`/users/me`);
       if (res.status == 200) {
-        setUser(res.data.user);
+        login(res.data.user);
       }
     } catch (err) {
-      console.log(err);
+      logout();
     }
   }
 
-  // useEffect(() => {
-  //   getAuthUser();
-  // }, []);
+  useEffect(() => {
+    getAuthUser();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
