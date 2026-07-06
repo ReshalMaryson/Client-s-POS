@@ -4,6 +4,36 @@ const Products = require("../models/productSchema");
 const invoiceSequence = require("../models/invoiceSequenceSchema");
 const mongoose = require("mongoose");
 
+// get all sales
+exports.getAllSales = async (req, res) => {
+  try {
+    const sales = await Sales.find()
+      .populate("soldBy")
+      .populate("items.product")
+      .sort({ createdAt: -1 });
+
+    if (sales.length === 0) {
+      return res
+        .status(200)
+        .json({ status: "failure", message: "failed to fetch sales" });
+    }
+
+    //success response
+    return res.status(200).json({
+      status: "success",
+      message: "sales fetched",
+      data: sales,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      status: "failure",
+      message: "Server Error",
+    });
+  }
+};
+
+// create a sale
 exports.createSale = async (req, res) => {
   const session = await mongoose.startSession();
   try {
@@ -104,7 +134,7 @@ exports.createSale = async (req, res) => {
 
     // update the stock
     for (const item of cartItems) {
-      await Products.findByIdAndUpdate( 
+      await Products.findByIdAndUpdate(
         item.id,
         {
           $inc: {

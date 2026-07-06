@@ -1,6 +1,7 @@
 
 .prod-header,
 .prod-row {
+    margin-top: 10px;
     display: flex;
     align-items: center;
     min-height: 42px;

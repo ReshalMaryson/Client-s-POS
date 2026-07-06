@@ -17,28 +17,32 @@ export default function Product({ products }) {
         <p>Actions</p>
       </div>
 
-      {products.map((product, index) => (
-        <div
-          key={product._id}
-          className={`prod-row ${index % 2 === 0 ? "light" : "dark"}`}
-        >
-          <p>{product.name}</p>
-          <p>{product.brand}</p>
-          <p>{product.specs.cpu}</p>
-          <p>{product.specs.ram}</p>
-          <p>{product.specs.storage}</p>
-          <p>{product.specs.gpu}</p>
-          <p>Rs. {product.cost.toLocaleString()}</p>
-          <p>Rs. {product.price.toLocaleString()}</p>
-          <p>{product.stock}</p>
-          <p>{new Date(product.createdAt).toLocaleDateString()}</p>
+      {products.length === 0 ? (
+        <h3 className="loading">Loading products...</h3>
+      ) : (
+        products.map((product, index) => (
+          <div
+            key={product._id}
+            className={`prod-row ${index % 2 === 0 ? "light" : "dark"}`}
+          >
+            <p>{product.name}</p>
+            <p>{product.brand}</p>
+            <p>{product.specs.cpu}</p>
+            <p>{product.specs.ram}</p>
+            <p>{product.specs.storage}</p>
+            <p>{product.specs.gpu}</p>
+            <p>Rs. {product.cost.toLocaleString()}</p>
+            <p>Rs. {product.price.toLocaleString()}</p>
+            <p>{product.stock}</p>
+            <p>{new Date(product.createdAt).toLocaleDateString()}</p>
 
-          <div className="actions">
-            <button className="edit-btn">Update</button>
-            <button className="delete-btn">Delete</button>
+            <div className="actions">
+              <button className="edit-btn">Update</button>
+              <button className="delete-btn">Delete</button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </>
   );
 }

@@ -7,7 +7,11 @@ import "../../css/dashboard/dashboard.css";
 import { useState } from "react";
 
 //controllers
-import { getEmp, getProds } from "../dashboard/controller/dashboardController";
+import {
+  getEmp,
+  getProds,
+  getAllSales,
+} from "../dashboard/controller/dashboardController";
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState(null);
@@ -17,6 +21,9 @@ export default function Dashboard() {
 
   const [prods, setProds] = useState([]);
   const [prodLoaded, setProdLoaded] = useState(false);
+
+  const [allSales, setAllSales] = useState([]);
+  const [salesLoaded, setSalesLoaded] = useState(false);
 
   // fetch employee and show the emp section when clicked
   async function showEmployees() {
@@ -38,6 +45,16 @@ export default function Dashboard() {
     }
   }
 
+  // fetch sales and show the sales section when clicked
+  async function showSales() {
+    setActiveSection("sales");
+
+    if (!salesLoaded) {
+      await getAllSales(setAllSales);
+      setSalesLoaded(true);
+    }
+  }
+
   return (
     <>
       <div className="container">
@@ -50,7 +67,7 @@ export default function Dashboard() {
             Customers
           </button>
 
-          <button onClick={() => setActiveSection("sales")}>Sales</button>
+          <button onClick={showSales}>Sales</button>
         </div>
 
         {activeSection === "employees" && <Employees emps={emps} />}
@@ -59,7 +76,7 @@ export default function Dashboard() {
 
         {activeSection === "customers" && <Customer />}
 
-        {activeSection === "sales" && <Sales />}
+        {activeSection === "sales" && <Sales sales={allSales} />}
       </div>
     </>
   );

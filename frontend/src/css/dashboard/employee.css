@@ -1,10 +1,11 @@
-
 .emp-header,
 .emp-row {
+    margin-top: 10px;
     display: flex;
     align-items: center;
-    height: 40px;
+    min-height: 42px;
     font-family: sans-serif;
+
 }
 
 .emp-header {
@@ -19,6 +20,7 @@
     margin: 0;
     padding: 0 10px;
     font-size: 14px;
+    word-break: break-word;
 }
 
 .light {
@@ -31,5 +33,44 @@
 
 .emp-row:hover {
     background: #dbeafe;
+}
+
+.actions {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
+    color: white;
+    font-size: 12px;
+}
+
+.edit-btn {
+    background: #f59e0b;
+}
+
+.edit-btn:hover {
+    background: #d97706;
+}
+
+.delete-btn {
+    background: #ef4444;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
+
+.loading {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+    font-weight: normal;
 }
