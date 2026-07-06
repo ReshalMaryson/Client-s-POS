@@ -8,9 +8,7 @@
 
 
 
-/* ===========================
-   HEADER
-=========================== */
+/*  HEADER*/
 .sale-header,.sale-container{
     width: 85%;
     margin: 0 auto;
@@ -62,9 +60,7 @@
 }
 
 
-/* ===========================
-   SALE ROW
-=========================== */
+/* SALE ROW */
 
 .sale-container {
     overflow: hidden;
@@ -90,9 +86,7 @@
 }
 
 
-/* ===========================
-   ARROW
-=========================== */
+/*  ARROW*/
 
 .arrow {
     text-align: center;
@@ -105,9 +99,7 @@
 }
 
 
-/* ===========================
-   EXPAND ANIMATION
-=========================== */
+/* EXPAND ANIMATION*/
 
 .sale-expanded {
     max-height: 0;
@@ -129,9 +121,7 @@
 }
 
 
-/* ===========================
-   SECTION TITLES
-=========================== */
+/* SECTION TITLES */
 
 .section-title {
     background: #2d3748;
@@ -151,9 +141,7 @@
 }
 
 
-/* ===========================
-   SALE DETAILS
-=========================== */
+/* SALE DETAILS*/
 
 .details-header {
     background: #edf2f7;
@@ -167,9 +155,9 @@
 }
 
 
-/* ===========================
-   ITEMS
-=========================== */
+
+   /* ITEMS */
+
 
 .items-header {
     background: #edf2f7;
@@ -193,9 +181,7 @@
 }
 
 
-/* ===========================
-   COLUMN WIDTHS
-=========================== */
+   /* COLUMN WIDTHS */
 
 /* Product ID */
 
@@ -234,9 +220,7 @@
 }
 
 
-/* ===========================
-   LOADING
-=========================== */
+   /* LOADING */
 
 .loading {
     text-align: center;
