@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const refreshTokenSchema = new mongoose.Schema({
-  userid: {
+  user: {
     type: mongoose.Types.ObjectId,
     ref: "users",
   },

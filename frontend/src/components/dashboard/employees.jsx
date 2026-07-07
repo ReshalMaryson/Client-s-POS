@@ -1,4 +1,5 @@
 import "../../css/dashboard/employee.css";
+import { deleteUserAccount } from "../user/controllers/userController";
 
 export default function Employees({ emps }) {
   return (
@@ -28,7 +29,12 @@ export default function Employees({ emps }) {
 
             <div className="actions">
               <button className="edit-btn">Update</button>
-              <button className="delete-btn">Delete</button>
+              <button
+                className="delete-btn"
+                onClick={() => deleteUserAccount(emp._id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))

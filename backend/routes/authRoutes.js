@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
     // save refresh token in the DB
     if (refreshToken) {
       refreshTokenSchema.create({
-        id: user._id,
+        user: user._id,
         token: refreshToken,
       });
     }

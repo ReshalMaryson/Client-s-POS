@@ -34,7 +34,7 @@ export const updateUser = async (id, updateData, setUser) => {
   }
 };
 
-//delete account
+//delete logged in user's account
 export const deleteAccount = async (id, logoutReq, navigate, contextEmpty) => {
   try {
     const res = await api.delete(`/users/${id}`);
@@ -43,6 +43,20 @@ export const deleteAccount = async (id, logoutReq, navigate, contextEmpty) => {
       logoutReq(navigate, contextEmpty);
     }
     // console.log(res)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// delete a user account
+export const deleteUserAccount = async (id) => {
+  try {
+    const res = await api.delete(`/users/${id}`);
+
+    // if (res.status == 200) {
+    //  log
+    // }
+    console.log(res);
   } catch (err) {
     console.log(err);
   }

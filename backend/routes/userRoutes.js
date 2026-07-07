@@ -26,6 +26,7 @@ const {
   deleteUser,
   updateUser,
   getVerifiedUser,
+  deleteAUser,
 } = require("../controllers/userController");
 
 //-------routes---------//
@@ -42,6 +43,12 @@ router.get("/:id", verifyToken, checkUserExists, getUserById);
 // create a user
 router.post("/", createUserValidator, validate, emailCheck, createUser);
 
+// delete logged in user's account and delete its current token
+router.delete("/:id", verifyToken, isAdmin, deleteUser);
+
+// delete a single user
+router.delete("/user/:id", verifyToken, isAdmin, deleteAUser);
+
 // update all details of user
 router.put(
   "/:id",
@@ -51,6 +58,5 @@ router.put(
   validate,
   updateUser,
 );
-// delete a user
-router.delete("/:id", verifyToken, isAdmin, deleteUser);
+
 module.exports = router;
