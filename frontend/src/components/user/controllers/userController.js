@@ -21,16 +21,17 @@ export const updateUser = async (id, updateData, setUser) => {
   try {
     const res = await api.put(`/users/${id}`, updateData);
     if (res.status == 200) {
-      getUser(setUser);
+      if (setUser && typeof setUser === "function") {
+        getUser(setUser);
+      }
+      return;
     }
     console.log(res);
   } catch (err) {
-    // if (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response?.data?.errors || [];
     errors.forEach((error) => {
       console.log(error.msg);
     });
-    // }
   }
 };
 

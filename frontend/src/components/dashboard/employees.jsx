@@ -1,7 +1,22 @@
 import "../../css/dashboard/employee.css";
-import { deleteUserAccount } from "../user/controllers/userController";
+import { useState } from "react";
 
-export default function Employees({ emps, reloadData }) {
+import {
+  deleteUserAccount,
+  updateUser,
+} from "../user/controllers/userController";
+import UpdateEmployee from "./popUpEmpUpdate";
+
+export default function Employees({ emps, setEmps, reloadData }) {
+  const [updateModalActive, setupdateModalActive] = useState(false);
+
+  // show update modal
+  function showUpdateModal() {
+    if (!updateModalActive) {
+      setupdateModalActive(true);
+    }
+  }
+
   return (
     <>
       <div className="emp-header">
@@ -28,7 +43,9 @@ export default function Employees({ emps, reloadData }) {
             <p>{new Date(emp.createdAt).toLocaleDateString()}</p>
 
             <div className="actions">
-              <button className="edit-btn">Update</button>
+              <button className="edit-btn" onClick={showUpdateModal}>
+                Update
+              </button>
               <button
                 className="delete-btn"
                 onClick={async () => {
@@ -38,6 +55,20 @@ export default function Employees({ emps, reloadData }) {
               >
                 Delete
               </button>
+            </div>
+
+            <div
+              className={
+                updateModalActive ? "updateModal active" : "updateModal"
+              }
+            >
+              <UpdateEmployee
+                employee={emp}
+                setEmps={setEmps}
+                updateUser={updateUser}
+                reloadData={reloadData}
+                closeModal={setupdateModalActive}
+              />
             </div>
           </div>
         ))

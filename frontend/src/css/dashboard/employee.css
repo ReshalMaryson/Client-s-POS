@@ -1,3 +1,11 @@
+.updateModal{
+    display: none;
+}
+
+.updateModal.active{
+    display: block;
+}
+
 .emp-header,
 .emp-row {
     margin-top: 10px;

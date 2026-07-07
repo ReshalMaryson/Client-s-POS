@@ -78,7 +78,11 @@ export default function Dashboard() {
         </div>
 
         {activeSection === "employees" && (
-          <Employees emps={emps} reloadData={reLoadEmployees} />
+          <Employees
+            emps={emps}
+            setEmps={setEmps}
+            reloadData={reLoadEmployees}
+          />
         )}
 
         {activeSection === "products" && <Product products={prods} />}
