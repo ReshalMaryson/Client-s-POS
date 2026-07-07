@@ -1,7 +1,7 @@
 import "../../css/dashboard/employee.css";
 import { deleteUserAccount } from "../user/controllers/userController";
 
-export default function Employees({ emps }) {
+export default function Employees({ emps, reloadData }) {
   return (
     <>
       <div className="emp-header">
@@ -31,7 +31,10 @@ export default function Employees({ emps }) {
               <button className="edit-btn">Update</button>
               <button
                 className="delete-btn"
-                onClick={() => deleteUserAccount(emp._id)}
+                onClick={async () => {
+                  await deleteUserAccount(emp._id);
+                  reloadData();
+                }}
               >
                 Delete
               </button>

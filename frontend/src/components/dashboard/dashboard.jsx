@@ -35,6 +35,13 @@ export default function Dashboard() {
     }
   }
 
+  //reload employee data
+  async function reLoadEmployees() {
+    if (activeSection == "employees" || empLoaded) {
+      await getEmp(setEmps);
+    }
+  }
+
   // fetch products and show the products section when clicked
   async function showProducts() {
     setActiveSection("products");
@@ -70,7 +77,9 @@ export default function Dashboard() {
           <button onClick={showSales}>Sales</button>
         </div>
 
-        {activeSection === "employees" && <Employees emps={emps} />}
+        {activeSection === "employees" && (
+          <Employees emps={emps} reloadData={reLoadEmployees} />
+        )}
 
         {activeSection === "products" && <Product products={prods} />}
 

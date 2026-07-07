@@ -51,12 +51,11 @@ export const deleteAccount = async (id, logoutReq, navigate, contextEmpty) => {
 // delete a user account
 export const deleteUserAccount = async (id) => {
   try {
-    const res = await api.delete(`/users/${id}`);
-
-    // if (res.status == 200) {
-    //  log
-    // }
-    console.log(res);
+    const res = await api.delete(`/users/user/${id}`);
+    // console.log(res);
+    if (res.status == 200) {
+      return;
+    }
   } catch (err) {
     console.log(err);
   }
