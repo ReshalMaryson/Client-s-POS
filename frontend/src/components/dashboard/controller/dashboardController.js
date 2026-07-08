@@ -40,3 +40,16 @@ export const getAllSales = async (setAllSales) => {
     console.log(err);
   }
 };
+
+// delete product
+export const deleteProduct = async (id) => {
+  try {
+    const res = await api.delete(`/products/${id}`);
+    // console.log(res);
+    if (res.status == 200) {
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

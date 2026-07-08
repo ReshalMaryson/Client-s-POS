@@ -1,8 +1,23 @@
 import "../../css/dashboard/products.css";
+import { useState } from "react";
+import AddProduct from "./createProduct";
 
-export default function Product({ products }) {
+export default function Product({ products, deleteProduct, reloadData }) {
+  const [createModalActive, setCreateModalActive] = useState(false);
+
+  // show update modal
+  function showCreateModal() {
+    if (!createModalActive) {
+      setCreateModalActive(true);
+    }
+  }
   return (
     <>
+      <div className="addProduct">
+        <button type="button" onClick={() => showCreateModal()}>
+          Add
+        </button>
+      </div>
       <div className="prod-header">
         <p>Name</p>
         <p>Brand</p>
@@ -38,11 +53,23 @@ export default function Product({ products }) {
 
             <div className="actions">
               <button className="edit-btn">Update</button>
-              <button className="delete-btn">Delete</button>
+              <button
+                className="delete-btn"
+                onClick={async () => {
+                  await deleteProduct(product._id);
+                  reloadData();
+                }}
+              >
+                {" "}
+                Delete
+              </button>
             </div>
           </div>
         ))
       )}
+      <div className={createModalActive ? "createProd active" : "createProd"}>
+        <AddProduct closeModal={setCreateModalActive} />
+      </div>
     </>
   );
 }

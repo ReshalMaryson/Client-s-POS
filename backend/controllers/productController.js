@@ -124,3 +124,32 @@ exports.updateProduct = async (req, res) => {
     });
   }
 };
+
+// delete a product
+exports.deleteProduct = async (req, res) => {
+  try {
+    const Id = new mongoose.Types.ObjectId(req.params.id);
+    if (!Id) {
+      return res.status(400).json({ message: "invalid parameter Id" });
+    }
+
+    const deletedProduct = await Product.findByIdAndDelete({ _id: Id });
+    if (!deletedProduct) {
+      return res.status(404).json({
+        status: "failure",
+        message: `product not found with id: ${Id}`,
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      message: "Product deleted",
+      data: deletedProduct._id,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: "failure",
+      message: "Server Error " + err.message,
+    });
+  }
+};

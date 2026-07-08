@@ -1,3 +1,20 @@
+.addProduct{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.6rem;
+}
+
+.addProduct button{
+    background-color:#2d3748;
+    font-size: 1rem;
+    color: white;
+    padding: 0.3rem;
+    width: 6%;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
 
 .prod-header,
 .prod-row {
@@ -67,4 +84,11 @@
 
 .delete-btn:hover {
     background: #dc2626;
+}
+
+.createProd{
+    display: none;
+}
+.createProd.active{
+    display: block;
 }

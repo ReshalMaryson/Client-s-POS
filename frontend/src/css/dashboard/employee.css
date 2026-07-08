@@ -8,18 +8,26 @@
 
 .emp-header,
 .emp-row {
-    margin-top: 10px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     min-height: 42px;
     font-family: sans-serif;
-
+    width: 80%;
+    border-radius: 5px;
 }
 
 .emp-header {
     background: #2d3748;
     color: white;
     font-weight: bold;
+     margin-top: 30px;
+ 
+}
+.emp-row {
+     margin-top: 20px;
+         border: 1px solid rgb(37, 37, 73);
+
 }
 
 .emp-header p,

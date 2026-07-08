@@ -11,6 +11,7 @@ import {
   getEmp,
   getProds,
   getAllSales,
+  deleteProduct,
 } from "../dashboard/controller/dashboardController";
 
 export default function Dashboard() {
@@ -34,11 +35,14 @@ export default function Dashboard() {
       setEmpLoaded(true);
     }
   }
-
   //reload employee data
-  async function reLoadEmployees() {
+  async function reLoadData() {
     if (activeSection == "employees" || empLoaded) {
       await getEmp(setEmps);
+    } else if (activeSection == "products" || prodLoaded) {
+      await getProds(setProds);
+    } else if (activeSection == "sales" || salesLoaded) {
+      await getAllSales(setAllSales);
     }
   }
 
@@ -78,14 +82,16 @@ export default function Dashboard() {
         </div>
 
         {activeSection === "employees" && (
-          <Employees
-            emps={emps}
-            setEmps={setEmps}
-            reloadData={reLoadEmployees}
-          />
+          <Employees emps={emps} setEmps={setEmps} reloadData={reLoadData} />
         )}
 
-        {activeSection === "products" && <Product products={prods} />}
+        {activeSection === "products" && (
+          <Product
+            products={prods}
+            deleteProduct={deleteProduct}
+            reloadData={reLoadData}
+          />
+        )}
 
         {activeSection === "customers" && <Customer />}
 

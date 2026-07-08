@@ -17,6 +17,7 @@ const {
   Products,
   getProductById,
   updateProduct,
+  deleteProduct,
 } = require("../controllers/productController");
 
 // get all products
@@ -27,6 +28,9 @@ router.get("/:id", verifyToken, getProductById);
 
 // create a product
 router.post("/", verifyToken, productValidator, validate, createProduct);
+
+// delete a product
+router.delete("/:id", verifyToken, isAdmin, deleteProduct);
 
 // update a product
 router.put(
