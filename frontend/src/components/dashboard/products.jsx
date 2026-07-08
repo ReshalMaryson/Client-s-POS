@@ -2,6 +2,9 @@ import "../../css/dashboard/products.css";
 import { useState } from "react";
 import AddProduct from "./createProduct";
 
+//controller
+import { createProduct } from "./controller/dashboardController";
+
 export default function Product({ products, deleteProduct, reloadData }) {
   const [createModalActive, setCreateModalActive] = useState(false);
 
@@ -68,7 +71,11 @@ export default function Product({ products, deleteProduct, reloadData }) {
         ))
       )}
       <div className={createModalActive ? "createProd active" : "createProd"}>
-        <AddProduct closeModal={setCreateModalActive} />
+        <AddProduct
+          closeModal={setCreateModalActive}
+          create={createProduct}
+          reloadData={reloadData}
+        />
       </div>
     </>
   );

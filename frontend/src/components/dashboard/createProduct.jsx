@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../css/dashboard/createProduct.css";
 
-export default function AddProduct({ closeModal }) {
+export default function AddProduct({ closeModal, create, reloadData }) {
   // Basic Info
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
@@ -14,6 +14,18 @@ export default function AddProduct({ closeModal }) {
   const [ram, setRam] = useState("8GB");
   const [storage, setStorage] = useState("256GB");
   const [gpu, setGpu] = useState("");
+
+  function clearCreateFields() {
+    setName("");
+    setBrand("");
+    setCost("");
+    setPrice("");
+    setStock("");
+    setCpu("");
+    setRam("");
+    setStorage("");
+    setGpu("");
+  }
 
   const payload = {
     name: name,
@@ -29,10 +41,6 @@ export default function AddProduct({ closeModal }) {
       gpu: gpu,
     },
   };
-
-  function showPayload() {
-    console.log(payload);
-  }
 
   return (
     <>
@@ -126,7 +134,6 @@ export default function AddProduct({ closeModal }) {
                 <option>512GB Nvme</option>
                 <option>1TB</option>
                 <option>1TB Nvme</option>
-
                 <option>2TB</option>
                 <option>2TBNvme</option>
               </select>
@@ -147,6 +154,7 @@ export default function AddProduct({ closeModal }) {
             <button
               className="cancel-btn"
               onClick={() => {
+                clearCreateFields();
                 closeModal(false);
               }}
             >
@@ -155,12 +163,14 @@ export default function AddProduct({ closeModal }) {
 
             <button
               className="save-btn"
-              onClick={() => {
-                showPayload();
+              onClick={async () => {
+                await create(payload);
+                reloadData();
+                clearCreateFields();
+                closeModal(false);
               }}
             >
               Add
-              {/* {loading ? "Updating..." : "Update"} */}
             </button>
           </div>
         </div>
@@ -168,10 +178,3 @@ export default function AddProduct({ closeModal }) {
     </>
   );
 }
-
-// updateUser()
-//   onUpdate({
-//     ...employee,
-//     name,
-//     phone,
-//   })

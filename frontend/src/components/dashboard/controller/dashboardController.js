@@ -53,3 +53,16 @@ export const deleteProduct = async (id) => {
     console.log(err);
   }
 };
+
+// create product
+export const createProduct = async (payload) => {
+  try {
+    const res = await api.post(`/products`, payload);
+    // console.log(res);
+    if (res.status == 201) {
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

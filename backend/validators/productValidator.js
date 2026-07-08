@@ -6,15 +6,15 @@ exports.productValidator = [
     .trim()
     .notEmpty()
     .withMessage("Product name is required")
-    .isLength({ max: 20 })
-    .withMessage("Product name cannot exceed 20 characters"),
+    .isLength({ max: 50 })
+    .withMessage("Product name cannot exceed 50 characters"),
 
   body("brand")
     .trim()
     .notEmpty()
     .withMessage("Brand is required")
-    .isLength({ max: 20 })
-    .withMessage("Product Brand cannot exceed 20 characters"),
+    .isLength({ max: 50 })
+    .withMessage("Product Brand cannot exceed 50 characters"),
 
   // numbers
   body("price")
@@ -47,24 +47,24 @@ exports.productValidator = [
     .trim()
     .notEmpty()
     .withMessage("CPU is required")
-    .isLength({ max: 20 })
-    .withMessage("CPU cannot exceed 10 characters"),
+    .isLength({ max: 50 })
+    .withMessage("CPU cannot exceed 50 characters"),
   body("specs.gpu")
     .trim()
     .notEmpty()
     .withMessage("GPU is required")
-    .isLength({ max: 15 })
-    .withMessage("GPU name cannot exceed 15 characters"),
+    .isLength({ max: 50 })
+    .withMessage("GPU name cannot exceed 50 characters"),
   body("specs.ram")
     .trim()
     .notEmpty()
     .withMessage("RAM is required")
-    .isLength({ max: 10 })
-    .withMessage("RAM cannot exceed 10 characters"),
+    .isLength({ max: 50 })
+    .withMessage("RAM cannot exceed 50 characters"),
   body("specs.storage")
     .trim()
     .notEmpty()
     .withMessage("Storage is required")
-    .isLength({ max: 15 })
-    .withMessage("Stroage cannot exceed 10 characters"),
+    .isLength({ max: 50 })
+    .withMessage("Stroage cannot exceed 50 characters"),
 ];
