@@ -96,7 +96,7 @@ export default function Sales({ sales }) {
                 </div>
 
                 {sale.items.map((item, itemIndex) => {
-                  const description = `${item.product.name} ${item.product.specs.cpu} ${item.product.specs.ram}GB ${item.product.specs.storage}GB ${item.product.specs.gpu}`;
+                  const description = `${item.name} ${item.product.cpu} ${item.product.ram}GB ${item.product.storage}GB ${item.product.gpu}`;
 
                   return (
                     <div

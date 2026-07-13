@@ -9,7 +9,7 @@ exports.getAllSales = async (req, res) => {
   try {
     const sales = await Sales.find()
       .populate("soldBy")
-      .populate("items.product")
+      // .populate("items.product")
       .sort({ createdAt: -1 });
 
     if (sales.length === 0) {
