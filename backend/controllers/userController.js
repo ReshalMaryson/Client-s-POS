@@ -198,8 +198,7 @@ exports.deleteAUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const Id = req.params.id;
-    console.log("PARAM ID:", Id);
-    console.log("TYPE:", typeof Id);
+   
     if (!mongoose.Types.ObjectId.isValid(Id)) {
       return res.status(400).json({ message: "invalid Id" });
     }
